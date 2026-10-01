@@ -1,0 +1,283 @@
+{% extends 'tallermami/base.html' %}
+
+
+{% block title %}
+
+Estado de mi vehículo | Taller Molina Henze
+
+{% endblock %}
+
+
+{% block content %}
+
+
+<section class="page-header">
+
+    <div class="container">
+
+        <span>
+            SEGUIMIENTO
+        </span>
+
+        <h1>
+            Estado de mi vehículo
+        </h1>
+
+        <p>
+            Consultá el estado de reparación ingresando
+            la patente de tu vehículo.
+        </p>
+
+    </div>
+
+</section>
+
+
+<section class="tracking-page">
+
+    <div class="container">
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-7">
+
+
+                <div class="tracking-search-card">
+
+                    <div class="tracking-search-icon">
+
+                        <i class="fa-solid fa-car"></i>
+
+                    </div>
+
+
+                    <h2>
+                        ¿Dónde está tu vehículo?
+                    </h2>
+
+
+                    <p>
+                        Ingresá la patente para consultar
+                        el estado actual de la reparación.
+                    </p>
+
+
+                    <form method="POST">
+
+                        {% csrf_token %}
+
+
+                        <div class="input-group input-group-lg">
+
+                            <input
+                                type="text"
+                                name="patente"
+                                class="form-control"
+                                placeholder="Ej: AB123CD"
+                                value="{{ patente_buscada }}"
+                                maxlength="20"
+                                required
+                                style="text-transform: uppercase;"
+                            >
+
+
+                            <button
+                                type="submit"
+                                class="btn btn-primary"
+                            >
+
+                                <i class="fa-solid fa-magnifying-glass"></i>
+
+                                Consultar
+
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+
+                {% if turno %}
+
+
+                    <div class="vehicle-status-card">
+
+
+                        <div class="vehicle-status-header">
+
+                            <div>
+
+                                <span>
+                                    VEHÍCULO
+                                </span>
+
+                                <h2>
+                                    {{ turno.vehiculo }}
+                                </h2>
+
+                            </div>
+
+
+                            <div class="patente-badge">
+
+                                {{ turno.patente }}
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="status-main">
+
+                            <span class="status-label">
+                                ESTADO ACTUAL
+                            </span>
+
+                            <h3>
+                                {{ turno.get_estado_display }}
+                            </h3>
+
+
+                            <div class="progress progress-taller">
+
+                                <div
+                                    class="progress-bar"
+                                    role="progressbar"
+                                    style="width: {{ turno.porcentaje_reparacion }}%;"
+                                    aria-valuenow="{{ turno.porcentaje_reparacion }}"
+                                    aria-valuemin="0"
+                                    aria-valuemax="100"
+                                >
+
+                                    {{ turno.porcentaje_reparacion }}%
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="progress-info">
+
+                                <span>
+                                    Avance de reparación
+                                </span>
+
+                                <strong>
+                                    {{ turno.porcentaje_reparacion }}%
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="status-details">
+
+
+                            <div class="status-detail">
+
+                                <i class="fa-solid fa-screwdriver-wrench"></i>
+
+                                <div>
+
+                                    <span>
+                                        Servicio
+                                    </span>
+
+                                    <strong>
+                                        {{ turno.servicio }}
+                                    </strong>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="status-detail">
+
+                                <i class="fa-solid fa-calendar"></i>
+
+                                <div>
+
+                                    <span>
+                                        Turno
+                                    </span>
+
+                                    <strong>
+                                        {{ turno.fecha_turno|date:"d/m/Y H:i" }}
+                                    </strong>
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+
+                        {% if turno.observaciones %}
+
+                            <div class="status-observations">
+
+                                <strong>
+                                    <i class="fa-solid fa-message"></i>
+                                    Observaciones
+                                </strong>
+
+                                <p>
+                                    {{ turno.observaciones }}
+                                </p>
+
+                            </div>
+
+                        {% endif %}
+
+
+                        <div class="status-updated">
+
+                            Última actualización:
+                            {{ turno.fecha_creacion|date:"d/m/Y H:i" }}
+
+                        </div>
+
+
+                    </div>
+
+
+                {% elif patente_buscada %}
+
+
+                    <div class="not-found-card">
+
+                        <div>
+
+                            <i class="fa-solid fa-car-burst"></i>
+
+                        </div>
+
+                        <h3>
+                            No encontramos ese vehículo
+                        </h3>
+
+                        <p>
+                            Revisá que la patente esté escrita
+                            correctamente e intentá nuevamente.
+                        </p>
+
+                    </div>
+
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+{% endblock %}

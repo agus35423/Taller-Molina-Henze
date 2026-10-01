@@ -1,0 +1,115 @@
+{% extends 'tallermami/base.html' %}
+
+
+{% block title %}
+
+Iniciar sesión | Taller Molina Henze
+
+{% endblock %}
+
+
+{% block content %}
+
+
+<section class="auth-section">
+
+    <div class="container">
+
+        <div class="row justify-content-center">
+
+            <div class="col-md-6 col-lg-5">
+
+
+                <div class="auth-card">
+
+
+                    <div class="auth-icon">
+
+                        <i class="fa-solid fa-user"></i>
+
+                    </div>
+
+
+                    <h1>
+                        Iniciar sesión
+                    </h1>
+
+
+                    <p>
+                        Ingresá a tu cuenta para consultar
+                        tus turnos.
+                    </p>
+
+
+                    <form method="POST">
+
+                        {% csrf_token %}
+
+
+                        {% if form.non_field_errors %}
+
+                            <div class="alert alert-danger">
+
+                                Usuario o contraseña incorrectos.
+
+                            </div>
+
+                        {% endif %}
+
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Usuario
+                            </label>
+
+                            {{ form.username }}
+
+                        </div>
+
+
+                        <div class="mb-4">
+
+                            <label class="form-label">
+                                Contraseña
+                            </label>
+
+                            {{ form.password }}
+
+                        </div>
+
+
+                        <button
+                            type="submit"
+                            class="btn btn-primary w-100"
+                        >
+
+                            Ingresar
+
+                        </button>
+
+                    </form>
+
+
+                    <div class="auth-footer">
+
+                        ¿Todavía no tenés una cuenta?
+
+                        <a href="{% url 'registro' %}">
+                            Registrate
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+{% endblock %}

@@ -1,0 +1,119 @@
+{% extends 'tallermami/base.html' %}
+
+
+{% block title %}
+
+Crear cuenta | Taller Molina Henze
+
+{% endblock %}
+
+
+{% block content %}
+
+
+<section class="auth-section">
+
+    <div class="container">
+
+        <div class="row justify-content-center">
+
+            <div class="col-md-7 col-lg-5">
+
+
+                <div class="auth-card">
+
+
+                    <div class="auth-icon">
+
+                        <i class="fa-solid fa-user-plus"></i>
+
+                    </div>
+
+
+                    <h1>
+                        Crear cuenta
+                    </h1>
+
+
+                    <p>
+                        Registrate para gestionar tus turnos.
+                    </p>
+
+
+                    <form method="POST">
+
+                        {% csrf_token %}
+
+
+                        {% for field in form %}
+
+                            <div class="mb-3">
+
+                                <label
+                                    class="form-label"
+                                    for="{{ field.id_for_label }}"
+                                >
+                                    {{ field.label }}
+                                </label>
+
+                                {{ field }}
+
+
+                                {% if field.help_text %}
+
+                                    <div class="form-text">
+                                        {{ field.help_text|safe }}
+                                    </div>
+
+                                {% endif %}
+
+
+                                {% for error in field.errors %}
+
+                                    <div class="text-danger small">
+                                        {{ error }}
+                                    </div>
+
+                                {% endfor %}
+
+                            </div>
+
+                        {% endfor %}
+
+
+                        <button
+                            type="submit"
+                            class="btn btn-primary w-100 mt-2"
+                        >
+
+                            <i class="fa-solid fa-user-plus me-2"></i>
+
+                            Crear cuenta
+
+                        </button>
+
+                    </form>
+
+
+                    <div class="auth-footer">
+
+                        ¿Ya tenés una cuenta?
+
+                        <a href="{% url 'login' %}">
+                            Iniciá sesión
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+{% endblock %}

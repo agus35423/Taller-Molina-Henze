@@ -1,0 +1,552 @@
+{% extends 'tallermami/base.html' %}
+
+{% load static %}
+
+
+{% block title %}
+
+Taller Molina Henze | Mecánica Automotriz
+
+{% endblock %}
+
+
+{% block content %}
+
+
+<!-- ======================================================
+     HERO
+======================================================= -->
+
+<section class="hero-principal">
+
+    <div class="hero-overlay"></div>
+
+    <div class="container hero-container">
+
+        <div class="hero-content">
+
+            <div class="hero-tag">
+
+                <span></span>
+
+                SERVICIO INTEGRAL
+
+            </div>
+
+
+            <h1>
+
+                Tu vehículo.
+                <br>
+
+                <strong>Nuestra especialidad.</strong>
+
+            </h1>
+
+
+            <p>
+
+                Mantenimiento, diagnóstico y reparación
+                automotriz con atención profesional y
+                tecnología para cuidar lo que te mueve.
+
+            </p>
+
+
+            <div class="hero-buttons">
+
+                <a
+                    href="{% url 'solicitar_turno' %}"
+                    class="btn btn-primary btn-lg"
+                >
+
+                    <i class="fa-solid fa-calendar-check me-2"></i>
+
+                    Solicitar turno
+
+                </a>
+
+
+                <a
+                    href="{% url 'estado_reparacion' %}"
+                    class="btn btn-outline-light btn-lg"
+                >
+
+                    <i class="fa-solid fa-magnifying-glass me-2"></i>
+
+                    Consultar vehículo
+
+                </a>
+
+            </div>
+
+
+            <div class="hero-features">
+
+                <div>
+
+                    <i class="fa-solid fa-circle-check"></i>
+
+                    Diagnóstico profesional
+
+                </div>
+
+
+                <div>
+
+                    <i class="fa-solid fa-circle-check"></i>
+
+                    Atención personalizada
+
+                </div>
+
+
+                <div>
+
+                    <i class="fa-solid fa-circle-check"></i>
+
+                    Seguimiento de reparación
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ======================================================
+     ESTADÍSTICAS
+======================================================= -->
+
+<section class="stats-section">
+
+    <div class="container">
+
+        <div class="stats-box">
+
+            <div class="stat-item">
+
+                <i class="fa-solid fa-car"></i>
+
+                <div>
+
+                    <strong>
+                        Servicio
+                    </strong>
+
+                    <span>
+                        Para distintos vehículos
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-item">
+
+                <i class="fa-solid fa-screwdriver-wrench"></i>
+
+                <div>
+
+                    <strong>
+                        Diagnóstico
+                    </strong>
+
+                    <span>
+                        Mantenimiento y reparación
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-item">
+
+                <i class="fa-solid fa-chart-line"></i>
+
+                <div>
+
+                    <strong>
+                        Seguimiento
+                    </strong>
+
+                    <span>
+                        Consultá el avance online
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-item">
+
+                <i class="fa-solid fa-calendar-check"></i>
+
+                <div>
+
+                    <strong>
+                        Turnos
+                    </strong>
+
+                    <span>
+                        Solicitá tu turno online
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ======================================================
+     SERVICIOS
+======================================================= -->
+
+<section
+    class="services-section"
+    id="servicios"
+>
+
+    <div class="container">
+
+
+        <div class="section-heading">
+
+            <span>
+                LO QUE HACEMOS
+            </span>
+
+            <h2>
+                Servicios para mantener
+                tu vehículo en movimiento
+            </h2>
+
+            <p>
+                Trabajamos con distintos tipos de vehículos
+                y ofrecemos soluciones para mantenimiento,
+                diagnóstico y reparación.
+            </p>
+
+        </div>
+
+
+        <div class="row g-4">
+
+
+            {% for trabajo in trabajos %}
+
+                <div class="col-md-6 col-lg-4">
+
+                    <div class="service-card">
+
+
+                        <div class="service-icon">
+
+                            <i class="fa-solid fa-screwdriver-wrench"></i>
+
+                        </div>
+
+
+                        <h3>
+                            {{ trabajo.nombre }}
+                        </h3>
+
+
+                        {% if trabajo.descripcion %}
+
+                            <p>
+                                {{ trabajo.descripcion }}
+                            </p>
+
+                        {% else %}
+
+                            <p>
+                                Servicio profesional realizado
+                                por nuestro equipo técnico.
+                            </p>
+
+                        {% endif %}
+
+
+                        {% if trabajo.precio_estimado %}
+
+                            <div class="service-price">
+
+                                Desde
+                                <strong>
+                                    ${{ trabajo.precio_estimado }}
+                                </strong>
+
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+
+            {% empty %}
+
+
+                <div class="col-12">
+
+                    <div class="empty-services">
+
+                        <i class="fa-solid fa-screwdriver-wrench"></i>
+
+                        <h3>
+                            Próximamente
+                        </h3>
+
+                        <p>
+                            Estamos cargando nuestros servicios.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+            {% endfor %}
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ======================================================
+     NOSOTROS
+======================================================= -->
+
+<section
+    class="about-section"
+    id="nosotros"
+>
+
+    <div class="container">
+
+        <div class="row align-items-center g-5">
+
+
+            <div class="col-lg-6">
+
+                <div class="about-image">
+
+                    <div class="about-image-main">
+
+                        <i class="fa-solid fa-car-side"></i>
+
+                        <span>
+                            MOLINA HENZE
+                        </span>
+
+                    </div>
+
+
+                    <div class="about-badge">
+
+                        <i class="fa-solid fa-award"></i>
+
+                        <div>
+
+                            <strong>
+                                Servicio integral
+                            </strong>
+
+                            <span>
+                                Atención profesional
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-lg-6">
+
+                <div class="section-heading text-start">
+
+                    <span>
+                        SOBRE NOSOTROS
+                    </span>
+
+                    <h2>
+                        Experiencia y compromiso
+                        con cada vehículo
+                    </h2>
+
+                </div>
+
+
+                <p class="about-text">
+
+                    En Taller Molina Henze brindamos un
+                    servicio integral de mecánica automotriz,
+                    enfocado en el diagnóstico, mantenimiento
+                    preventivo y reparación de vehículos.
+
+                </p>
+
+
+                <p class="about-text">
+
+                    Nuestro objetivo es ofrecer una atención
+                    clara y profesional, manteniendo al cliente
+                    informado sobre el estado de su vehículo
+                    durante todo el proceso.
+
+                </p>
+
+
+                <div class="about-list">
+
+                    <div>
+
+                        <i class="fa-solid fa-check"></i>
+
+                        Diagnóstico y mantenimiento
+
+                    </div>
+
+
+                    <div>
+
+                        <i class="fa-solid fa-check"></i>
+
+                        Reparaciones especializadas
+
+                    </div>
+
+
+                    <div>
+
+                        <i class="fa-solid fa-check"></i>
+
+                        Seguimiento del vehículo
+
+                    </div>
+
+
+                    <div>
+
+                        <i class="fa-solid fa-check"></i>
+
+                        Atención personalizada
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ======================================================
+     SEGUIMIENTO
+======================================================= -->
+
+<section class="tracking-section">
+
+    <div class="container">
+
+        <div class="tracking-box">
+
+            <div>
+
+                <span class="tracking-label">
+                    ¿YA DEJASTE TU VEHÍCULO?
+                </span>
+
+                <h2>
+                    Consultá el estado de tu reparación
+                </h2>
+
+                <p>
+                    Ingresá la patente de tu vehículo y
+                    consultá rápidamente el avance del trabajo.
+                </p>
+
+            </div>
+
+
+            <a
+                href="{% url 'estado_reparacion' %}"
+                class="btn btn-light btn-lg"
+            >
+
+                Consultar estado
+
+                <i class="fa-solid fa-arrow-right ms-2"></i>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ======================================================
+     CTA
+======================================================= -->
+
+<section class="cta-section">
+
+    <div class="container text-center">
+
+        <span>
+            ¿NECESITÁS ATENCIÓN PARA TU VEHÍCULO?
+        </span>
+
+        <h2>
+            Reservá tu turno online
+        </h2>
+
+        <p>
+            Elegí el servicio, indicá tus datos y
+            solicitá una fecha para acercar tu vehículo.
+        </p>
+
+        <a
+            href="{% url 'solicitar_turno' %}"
+            class="btn btn-primary btn-lg"
+        >
+
+            <i class="fa-solid fa-calendar-plus me-2"></i>
+
+            Solicitar un turno
+
+        </a>
+
+    </div>
+
+</section>
+
+
+{% endblock %}
