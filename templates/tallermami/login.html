@@ -1,5 +1,5 @@
-{% extends 'tallermami/base.html' %}
 
+{% extends 'tallermami/base.html' %}
 
 {% block title %}
 
@@ -7,9 +7,7 @@ Iniciar sesión | Taller Molina Henze
 
 {% endblock %}
 
-
 {% block content %}
-
 
 <section class="auth-section">
 
@@ -19,43 +17,32 @@ Iniciar sesión | Taller Molina Henze
 
             <div class="col-md-6 col-lg-5">
 
-
                 <div class="auth-card">
 
-
                     <div class="auth-icon">
-
                         <i class="fa-solid fa-user"></i>
-
                     </div>
-
 
                     <h1>
                         Iniciar sesión
                     </h1>
-
 
                     <p>
                         Ingresá a tu cuenta para consultar
                         tus turnos.
                     </p>
 
-
                     <form method="POST">
 
                         {% csrf_token %}
 
-
                         {% if form.non_field_errors %}
 
                             <div class="alert alert-danger">
-
                                 Usuario o contraseña incorrectos.
-
                             </div>
 
                         {% endif %}
-
 
                         <div class="mb-3">
 
@@ -67,8 +54,7 @@ Iniciar sesión | Taller Molina Henze
 
                         </div>
 
-
-                        <div class="mb-4">
+                        <div class="mb-2">
 
                             <label class="form-label">
                                 Contraseña
@@ -78,18 +64,23 @@ Iniciar sesión | Taller Molina Henze
 
                         </div>
 
+                        <!-- ENLACE PARA RECUPERAR CONTRASEÑA -->
+                        <div class="text-end mb-4">
+
+                            <a href="{% url 'password_reset' %}">
+                        ¿Olvidaste tu contraseña?
+                            </a>
+
+                        </div>
 
                         <button
                             type="submit"
                             class="btn btn-primary w-100"
                         >
-
                             Ingresar
-
                         </button>
 
                     </form>
-
 
                     <div class="auth-footer">
 
@@ -111,5 +102,5 @@ Iniciar sesión | Taller Molina Henze
 
 </section>
 
-
 {% endblock %}
+

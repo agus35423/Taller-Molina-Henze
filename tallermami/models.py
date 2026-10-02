@@ -61,6 +61,13 @@ class Trabajador(models.Model):
         blank=True
     )
 
+    trabajos = models.ManyToManyField(
+        Trabajo,
+        blank=True,
+        related_name="trabajadores",
+        verbose_name="Trabajos asignados"
+    )
+
     def __str__(self):
 
         return f"{self.nombre} {self.apellido}"
@@ -68,9 +75,7 @@ class Trabajador(models.Model):
     class Meta:
 
         verbose_name = "Trabajador"
-
         verbose_name_plural = "Trabajadores"
-
         ordering = ["apellido", "nombre"]
 
 
@@ -176,7 +181,22 @@ class Turno(models.Model):
 
         verbose_name="Servicio"
     )
+        # Trabajador asignado
+    # Trabajador asignado al turno
+    trabajador = models.ForeignKey(
 
+    Trabajador,
+
+    on_delete=models.SET_NULL,
+
+    null=True,
+
+    blank=True,
+
+    related_name="turnos_asignados",
+
+    verbose_name="Trabajador asignado"
+)
 
     # Fecha y hora
     fecha_turno = models.DateTimeField(

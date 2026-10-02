@@ -12,52 +12,36 @@ from .models import Turno, Trabajo
 class SolicitarTurnoForm(forms.ModelForm):
 
     nombre = forms.CharField(
-
         max_length=100,
-
         label="Nombre"
     )
 
     apellido = forms.CharField(
-
         max_length=100,
-
         label="Apellido"
     )
 
     email = forms.EmailField(
-
         label="Correo electrónico"
     )
 
     telefono = forms.CharField(
-
         max_length=30,
-
         label="Teléfono"
     )
 
-
     class Meta:
-
         model = Turno
 
         fields = [
-
             "vehiculo",
-
             "patente",
-
             "servicio",
-
             "fecha_turno",
-
             "observaciones",
         ]
 
-
         widgets = {
-
             "vehiculo": forms.TextInput(
                 attrs={
                     "class": "form-control",
@@ -95,7 +79,6 @@ class SolicitarTurnoForm(forms.ModelForm):
             ),
         }
 
-
     def __init__(self, *args, **kwargs):
 
         super().__init__(*args, **kwargs)
@@ -122,12 +105,35 @@ class SolicitarTurnoForm(forms.ModelForm):
             "placeholder": "351..."
         })
 
-
     def clean_patente(self):
 
         patente = self.cleaned_data["patente"]
 
-        return patente.upper().strip()
+        return patente.upper().replace(" ", "").replace("-", "")
+
+    def clean_fecha_turno(self):
+
+        fecha = self.cleaned_data.get("fecha_turno")
+
+        if not fecha:
+            return fecha
+
+        cantidad_turnos = Turno.objects.filter(
+            fecha_turno__date=fecha.date()
+        ).count()
+
+        if self.instance and self.instance.pk:
+            cantidad_turnos -= 1
+
+        if cantidad_turnos >= 3:
+
+            raise forms.ValidationError(
+                "Esta fecha ya está completa. "
+                "Ya hay 3 turnos asignados. "
+                "Por favor, seleccioná otra fecha."
+            )
+
+        return fecha
 
 
 # ==========================================================
@@ -137,28 +143,19 @@ class SolicitarTurnoForm(forms.ModelForm):
 class RegistroForm(UserCreationForm):
 
     email = forms.EmailField(
-
         required=True,
-
         label="Correo electrónico"
     )
 
-
     class Meta:
-
         model = User
 
         fields = [
-
             "username",
-
             "email",
-
             "password1",
-
             "password2",
         ]
-
 
     def __init__(self, *args, **kwargs):
 
