@@ -2326,14 +2326,24 @@ img {
 
     .hero-principal {
 
-        min-height: 620px;
+        min-height: 0;
+
+        background-position: 58% center;
+
+    }
+
+    .hero-content {
+
+        padding: 72px 0;
 
     }
 
 
     .hero-content h1 {
 
-        letter-spacing: -2px;
+        font-size: clamp(36px, 9vw, 56px);
+
+        letter-spacing: -1.5px;
 
     }
 
@@ -2358,26 +2368,75 @@ img {
 
     }
 
-
     .stats-box {
 
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+        padding: 12px;
 
     }
 
 
     .stat-item {
 
-        border-right: none;
+        min-width: 0;
+
+        padding: 14px 10px;
+
+        border-right: 1px solid var(--border);
 
         border-bottom: 1px solid var(--border);
 
     }
 
+    .stat-item:nth-child(2),
+    .stat-item:last-child {
 
+        border-right: none;
+
+    }
+
+    .stat-item:nth-child(3),
     .stat-item:last-child {
 
         border-bottom: none;
+
+    }
+
+    .stat-item > i {
+
+        flex: 0 0 40px;
+
+        width: 40px;
+
+        height: 40px;
+
+    }
+
+
+    .services-section,
+    .about-section,
+    .tracking-section,
+    .form-section,
+    .my-turns-section,
+    .export-section,
+    .tracking-page {
+
+        padding: 56px 0;
+
+    }
+
+
+    .page-header {
+
+        padding: 60px 0;
+
+    }
+
+
+    .section-heading {
+
+        margin-bottom: 32px;
 
     }
 
@@ -2395,10 +2454,47 @@ img {
 
     }
 
+    .about-image {
+
+        min-height: 330px;
+
+    }
+
+    .about-badge {
+
+        right: 5%;
+
+        max-width: 90%;
+
+    }
+
 
     .tracking-box {
 
-        padding: 35px;
+        padding: 30px 22px;
+
+    }
+
+
+    .form-card,
+    .tracking-search-card {
+
+        padding: 26px 20px;
+
+    }
+
+
+    .form-actions {
+
+        justify-content: stretch;
+
+        flex-wrap: wrap;
+
+    }
+
+    .form-actions .btn {
+
+        flex: 1 1 auto;
 
     }
 
@@ -2434,6 +2530,20 @@ img {
 
     }
 
+    .vehicle-status-header,
+    .status-main {
+
+        padding: 24px 20px;
+
+    }
+
+    .vehicle-status-header h2,
+    .status-main h3 {
+
+        overflow-wrap: anywhere;
+
+    }
+
 
     .status-details {
 
@@ -2444,18 +2554,69 @@ img {
 
     .status-detail {
 
+        padding: 20px;
+
         border-right: none;
 
         border-bottom: 1px solid var(--border);
 
     }
 
+    .status-observations {
+
+        margin: 0 20px 20px;
+
+    }
+
 
     .user-welcome {
 
+        padding: 22px;
+
+    }
+
+    .turn-card-top {
+
         align-items: flex-start;
 
-        flex-direction: column;
+        flex-wrap: wrap;
+
+        gap: 12px;
+
+        padding: 22px;
+
+    }
+
+    .turn-card-top h3 {
+
+        overflow-wrap: anywhere;
+
+    }
+
+    .turn-card-body {
+
+        padding: 22px;
+
+    }
+
+    .turn-card-footer {
+
+        padding: 16px 22px;
+
+    }
+
+
+    .turn-card-footer .btn {
+
+        flex: 1 1 auto;
+
+    }
+
+
+    .success-section,
+    .auth-section {
+
+        padding: 56px 0;
 
     }
 
@@ -2469,7 +2630,7 @@ img {
 
     .export-card {
 
-        padding: 35px 20px;
+        padding: 30px 20px;
 
     }
 
@@ -2479,6 +2640,317 @@ img {
         flex-direction: column;
 
         gap: 8px;
+
+    }
+
+}
+
+
+@media (max-width: 575px) {
+
+    .container {
+
+        padding-right: 18px;
+
+        padding-left: 18px;
+
+    }
+
+    .navbar-taller {
+
+        padding: 10px 0;
+
+    }
+
+    .brand-taller {
+
+        gap: 8px;
+
+        font-size: 15px;
+
+    }
+
+    .brand-icon {
+
+        width: 34px;
+
+        height: 34px;
+
+        flex: 0 0 34px;
+
+    }
+
+    .navbar-toggler {
+
+        padding: 5px 8px;
+
+    }
+
+    .navbar-taller .navbar-collapse {
+
+        padding-top: 12px;
+
+    }
+
+    .navbar-taller .navbar-nav {
+
+        align-items: stretch !important;
+
+        gap: 4px;
+
+    }
+
+    .navbar-taller .nav-link {
+
+        padding: 10px 4px !important;
+
+    }
+
+    .navbar-taller .nav-item > .btn {
+
+        display: block;
+
+        margin: 6px 0 0;
+
+        padding: 10px 12px;
+
+        text-align: center;
+
+    }
+
+    .hero-content {
+
+        padding: 58px 0;
+
+    }
+
+    .hero-tag {
+
+        font-size: 11px;
+
+        letter-spacing: 1.5px;
+
+    }
+
+    .hero-content h1 {
+
+        font-size: clamp(34px, 10vw, 46px);
+
+        letter-spacing: -1px;
+
+    }
+
+    .hero-content p {
+
+        font-size: 15px;
+
+        line-height: 1.6;
+
+    }
+
+    .hero-buttons {
+
+        flex-direction: column;
+
+    }
+
+    .hero-buttons .btn {
+
+        width: 100%;
+
+    }
+
+    .stats-section {
+
+        padding-bottom: 38px;
+
+    }
+
+    .stats-box {
+
+        grid-template-columns: 1fr;
+
+        transform: translateY(-22px);
+
+    }
+
+    .stat-item,
+    .stat-item:nth-child(2),
+    .stat-item:nth-child(3) {
+
+        border-right: none;
+
+        border-bottom: 1px solid var(--border);
+
+    }
+
+    .stat-item:last-child {
+
+        border-bottom: none;
+
+    }
+
+    .section-heading h2,
+    .page-header h1 {
+
+        font-size: clamp(30px, 8vw, 42px);
+
+        letter-spacing: -1px;
+
+    }
+
+    .page-header {
+
+        padding: 48px 0;
+
+    }
+
+    .form-card,
+    .tracking-search-card,
+    .auth-card {
+
+        padding: 24px 18px;
+
+    }
+
+    .form-card-header {
+
+        align-items: flex-start;
+
+        gap: 12px;
+
+        margin-bottom: 26px;
+
+    }
+
+    .form-card-header h2,
+    .tracking-search-card h2 {
+
+        font-size: 21px;
+
+    }
+
+    .form-icon {
+
+        flex: 0 0 46px;
+
+        width: 46px;
+
+        height: 46px;
+
+    }
+
+    .form-actions {
+
+        flex-direction: column-reverse;
+
+    }
+
+    .form-actions .btn {
+
+        width: 100%;
+
+    }
+
+    .tracking-search-card .input-group {
+
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 10px;
+
+    }
+
+    .tracking-search-card .input-group > .form-control,
+    .tracking-search-card .input-group > .btn {
+
+        width: 100%;
+
+        min-height: 48px;
+
+        border-radius: 8px !important;
+
+    }
+
+    .status-main {
+
+        padding: 22px 18px;
+
+    }
+
+    .status-main h3 {
+
+        font-size: 21px;
+
+    }
+
+    .progress-info {
+
+        gap: 10px;
+
+    }
+
+    .turn-card-top,
+    .turn-card-body {
+
+        padding: 20px 18px;
+
+    }
+
+    .turn-card-footer {
+
+        padding: 14px 18px;
+
+    }
+
+    .turn-card-top h3 {
+
+        font-size: 18px;
+
+    }
+
+    .success-card {
+
+        padding: 28px 18px;
+
+    }
+
+    .success-card h1 {
+
+        font-size: 29px;
+
+    }
+
+    .turno-summary {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .empty-services,
+    .empty-turns,
+    .not-found-card {
+
+        padding: 42px 20px;
+
+    }
+
+    .footer-taller {
+
+        padding: 46px 0 22px;
+
+    }
+
+    .footer-taller h5 {
+
+        margin-bottom: 14px;
+
+    }
+
+    .footer-bottom {
+
+        font-size: 10px;
 
     }
 
