@@ -98,7 +98,17 @@ path(
         views.mis_turnos,
         name="mis_turnos"
     ),
+    path(
+    "turnos/cancelar/<int:turno_id>/",
+    views.cancelar_turno,
+    name="cancelar_turno"
+    ),
 
+    path(
+    "oferta-turno/<uuid:token>/",
+    views.aceptar_oferta_turno,
+    name="aceptar_oferta_turno"
+    ),
 
     # ======================================================
     # ESTADO DEL VEHÍCULO

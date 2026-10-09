@@ -1,3 +1,4 @@
+
 {% extends 'tallermami/base.html' %}
 
 
@@ -71,7 +72,9 @@ Mis turnos | Taller Molina Henze
 
             <div class="row g-4">
 
+
                 {% for turno in turnos %}
+
 
                     <div class="col-lg-6">
 
@@ -183,12 +186,36 @@ Mis turnos | Taller Molina Henze
 
                             <div class="turn-card-footer">
 
+
                                 <a
                                     href="{% url 'estado_reparacion' %}"
                                     class="btn btn-outline-primary btn-sm"
                                 >
                                     Ver estado
                                 </a>
+
+
+                                <form
+    method="POST"
+    action="{% url 'cancelar_turno' turno.id %}"
+    style="display: inline;"
+    >
+
+    {% csrf_token %}
+
+    <button
+        type="submit"
+        class="btn btn-outline-danger btn-sm"
+        onclick="return confirm('¿Estás seguro de que querés cancelar este turno?');"
+    >
+
+        <i class="fa-solid fa-xmark me-1"></i>
+
+        Cancelar turno
+
+    </button>
+
+</form>
 
 
                                 <a
@@ -202,13 +229,17 @@ Mis turnos | Taller Molina Henze
 
                                 </a>
 
+
                             </div>
+
 
                         </div>
 
                     </div>
 
+
                 {% endfor %}
+
 
             </div>
 
@@ -252,3 +283,4 @@ Mis turnos | Taller Molina Henze
 
 
 {% endblock %}
+

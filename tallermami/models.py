@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator
-
+import uuid
 
 # ==========================================================
 # TRABAJOS / SERVICIOS
@@ -258,3 +258,50 @@ class Turno(models.Model):
         verbose_name_plural = "Turnos"
 
         ordering = ["-fecha_turno"]
+        # ==========================================================
+# OFERTA DE TURNO ANTERIOR
+# ==========================================================
+
+class OfertaTurno(models.Model):
+
+    ESTADOS = [
+        ("pendiente", "Pendiente"),
+        ("aceptada", "Aceptada"),
+        ("rechazada", "Rechazada"),
+        ("vencida", "Vencida"),
+    ]
+
+    turno_cliente = models.ForeignKey(
+        Turno,
+        on_delete=models.CASCADE,
+        related_name="ofertas_recibidas"
+    )
+
+    fecha_disponible = models.DateTimeField()
+
+    estado = models.CharField(
+        max_length=20,
+        choices=ESTADOS,
+        default="pendiente"
+    )
+
+    token = models.UUIDField(
+        unique=True,
+        editable=False,
+        default=uuid.uuid4
+    )
+
+    fecha_creacion = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    def __str__(self):
+        return (
+            f"Oferta para turno #{self.turno_cliente.id} "
+            f"- {self.fecha_disponible.strftime('%d/%m/%Y %H:%M')}"
+        )
+
+    class Meta:
+        verbose_name = "Oferta de turno anterior"
+        verbose_name_plural = "Ofertas de turnos anteriores"
+        ordering = ["fecha_creacion"]

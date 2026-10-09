@@ -1,0 +1,89 @@
+```html
+{% extends 'tallermami/base.html' %}
+
+
+{% block title %}
+
+Oferta no disponible | Taller Molina Henze
+
+{% endblock %}
+
+
+{% block content %}
+
+
+<section class="page-header">
+
+    <div class="container">
+
+        <span>
+            TURNO
+        </span>
+
+        <h1>
+            Oferta no disponible
+        </h1>
+
+        <p>
+            No fue posible confirmar tu solicitud de turno.
+        </p>
+
+    </div>
+
+</section>
+
+
+<section class="my-turns-section">
+
+    <div class="container">
+
+        <div class="empty-turns">
+
+            <div>
+
+                <i class="fa-solid fa-calendar-xmark"></i>
+
+            </div>
+
+            <h2>
+                Turno no disponible
+            </h2>
+
+            <p>
+                El horario que solicitaste ya no se encuentra disponible.
+                Podés volver a solicitar un turno seleccionando otra fecha u horario.
+            </p>
+
+            <div class="mt-4">
+
+                <a
+                    href="{% url 'solicitar_turno' %}"
+                    class="btn btn-primary"
+                >
+
+                    <i class="fa-solid fa-calendar-plus me-2"></i>
+
+                    Solicitar otro turno
+
+                </a>
+
+                <a
+                    href="{% url 'mis_turnos' %}"
+                    class="btn btn-outline-primary ms-2"
+                >
+
+                    Ver mis turnos
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+{% endblock %}
+```

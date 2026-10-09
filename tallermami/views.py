@@ -8,13 +8,14 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
 
+
 from openpyxl import Workbook, load_workbook
 from openpyxl.styles import Font, PatternFill, Alignment
 from openpyxl.utils import get_column_letter
 
 from .forms import RegistroForm, SolicitarTurnoForm
-from .models import Turno, Trabajo
-
+from django.urls import reverse
+from .models import Turno, Trabajo, OfertaTurno
 
 # ==========================================================
 # INICIO
@@ -284,11 +285,16 @@ def turno_exitoso(request, turno_id):
 # MIS TURNOS
 # ==========================================================
 
+
+
+
 @login_required
 def mis_turnos(request):
 
     turnos = Turno.objects.filter(
         usuario=request.user
+    ).exclude(
+        estado="cancelado"
     ).select_related(
         "servicio"
     )
@@ -301,6 +307,210 @@ def mis_turnos(request):
         }
     )
 
+
+
+# ==========================================================
+# CANCELAR TURNO
+# ==========================================================
+
+@login_required
+def cancelar_turno(request, turno_id):
+
+    turno = get_object_or_404(
+        Turno,
+        id=turno_id,
+        usuario=request.user
+    )
+
+    # Solo permitimos cancelar turnos que todavía estén activos
+    if turno.estado == "cancelado":
+        messages.error(
+            request,
+            "Este turno ya está cancelado."
+        )
+        return redirect("mis_turnos")
+
+    # Guardamos la fecha y hora que quedó libre
+    fecha_liberada = turno.fecha_turno
+
+    # Cancelamos el turno
+    turno.estado = "cancelado"
+    turno.save(update_fields=["estado"])
+
+    # ==========================================================
+    # BUSCAR CLIENTE PARA OFRECERLE EL HORARIO
+    # ==========================================================
+
+    turno_para_ofrecer = (
+        Turno.objects
+        .filter(
+            fecha_turno__gt=timezone.now(),
+            estado="pendiente"
+        )
+        .exclude(
+            id=turno.id
+        )
+        .select_related(
+            "usuario",
+            "servicio"
+        )
+        .order_by("fecha_turno")
+        .first()
+    )
+
+    # ==========================================================
+    # ENVIAR OFERTA
+    # ==========================================================
+
+    if turno_para_ofrecer and turno_para_ofrecer.usuario:
+
+        email_cliente = turno_para_ofrecer.usuario.email
+
+        if email_cliente:
+
+            oferta = OfertaTurno.objects.create(
+                turno_cliente=turno_para_ofrecer,
+                fecha_disponible=fecha_liberada
+            )
+
+            enlace = request.build_absolute_uri(
+                reverse(
+                    "aceptar_oferta_turno",
+                    args=[oferta.token]
+                )
+            )
+
+            send_mail(
+                subject="¡Se liberó un turno anterior!",
+                message=(
+                    f"Hola {turno_para_ofrecer.usuario.get_full_name() or turno_para_ofrecer.usuario.username},\n\n"
+
+                    "Se liberó un turno anterior al que tenés reservado.\n\n"
+
+                    f"Nuevo horario disponible:\n"
+                    f"{fecha_liberada.strftime('%d/%m/%Y %H:%M')}\n\n"
+
+                    "Si querés adelantar tu turno, ingresá al siguiente enlace:\n\n"
+
+                    f"QUIERO ADELANTAR MI TURNO:\n"
+                    f"{enlace}\n\n"
+
+                    "Si no querés adelantarlo, simplemente no hagas nada.\n\n"
+
+                    "Saludos.\n"
+                    "Taller Molina Henze"
+                ),
+                from_email=None,
+                recipient_list=[email_cliente],
+                fail_silently=False
+            )
+
+    messages.success(
+        request,
+        "Tu turno fue cancelado correctamente."
+    )
+
+    return redirect("mis_turnos")
+
+# ==========================================================
+# ACEPTAR OFERTA DE ADELANTO
+# ==========================================================
+
+def aceptar_oferta_turno(request, token):
+
+    oferta = get_object_or_404(
+        OfertaTurno,
+        token=token
+    )
+
+    # ==========================================================
+    # COMPROBAR SI LA OFERTA SIGUE DISPONIBLE
+    # ==========================================================
+
+    if oferta.estado != "pendiente":
+
+        return render(
+            request,
+            "tallermami/oferta_no_disponible.html"
+        )
+
+    turno = oferta.turno_cliente
+
+    # El turno fue cancelado
+    if turno.estado == "cancelado":
+
+        return render(
+            request,
+            "tallermami/oferta_no_disponible.html"
+        )
+
+    # ==========================================================
+    # GUARDAR HORARIO ANTERIOR
+    # ==========================================================
+
+    horario_anterior = turno.fecha_turno
+
+    # ==========================================================
+    # CAMBIAR HORARIO DEL TURNO
+    # ==========================================================
+
+    turno.fecha_turno = oferta.fecha_disponible
+    turno.save(
+        update_fields=["fecha_turno"]
+    )
+
+    # ==========================================================
+    # MARCAR OFERTA COMO ACEPTADA
+    # ==========================================================
+
+    oferta.estado = "aceptada"
+    oferta.save(
+        update_fields=["estado"]
+    )
+
+    # ==========================================================
+    # AVISAR AL CLIENTE
+    # ==========================================================
+
+    if turno.usuario and turno.usuario.email:
+
+        send_mail(
+            subject="Turno adelantado correctamente",
+
+            message=(
+                f"Hola {turno.usuario.get_full_name() or turno.usuario.username},\n\n"
+
+                "Tu turno fue adelantado correctamente.\n\n"
+
+                f"Nuevo horario:\n"
+                f"{turno.fecha_turno.strftime('%d/%m/%Y %H:%M')}\n\n"
+
+                "Gracias por utilizar nuestro sistema de turnos.\n\n"
+
+                "Taller Molina Henze"
+            ),
+
+            from_email=None,
+
+            recipient_list=[
+                turno.usuario.email
+            ],
+
+            fail_silently=True
+        )
+
+    # ==========================================================
+    # MOSTRAR OFERTA ACEPTADA
+    # ==========================================================
+
+    return render(
+        request,
+        "tallermami/oferta_aceptada.html",
+        {
+            "turno": turno,
+            "horario_anterior": horario_anterior
+        }
+    )
 
 # ==========================================================
 # ESTADO DE REPARACIÓN
