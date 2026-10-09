@@ -1,0 +1,128 @@
+{% extends 'tallermami/base.html' %}
+
+
+{% block title %}
+
+Exportar turnos | Taller Molina Henze
+
+{% endblock %}
+
+
+{% block content %}
+
+
+<section class="page-header">
+
+    <div class="container">
+
+        <span>
+            ADMINISTRACIÓN
+        </span>
+
+        <h1>
+            Exportar turnos
+        </h1>
+
+        <p>
+            Descargá la información de los turnos
+            en formato Excel.
+        </p>
+
+    </div>
+
+</section>
+
+
+<section class="export-section">
+
+    <div class="container">
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-8">
+
+
+                <div class="export-card">
+
+
+                    <div class="export-icon">
+
+                        <i class="fa-solid fa-file-excel"></i>
+
+                    </div>
+
+
+                    <h2>
+                        Archivo de turnos
+                    </h2>
+
+
+                    <p>
+
+                        El archivo contiene tres hojas:
+
+                    </p>
+
+
+                    <div class="export-list">
+
+
+                        <div>
+
+                            <i class="fa-solid fa-table"></i>
+
+                            <span>
+                                Todos los turnos
+                            </span>
+
+                        </div>
+
+
+                        <div>
+
+                            <i class="fa-solid fa-user-plus"></i>
+
+                            <span>
+                                Clientes nuevos
+                            </span>
+
+                        </div>
+
+
+                        <div>
+
+                            <i class="fa-solid fa-users"></i>
+
+                            <span>
+                                Clientes habituales
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <a
+                        href="{% url 'descargar_excel_turnos' %}"
+                        class="btn btn-success btn-lg"
+                    >
+
+                        <i class="fa-solid fa-download me-2"></i>
+
+                        Descargar Excel
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+{% endblock %}

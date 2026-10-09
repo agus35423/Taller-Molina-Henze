@@ -1,0 +1,254 @@
+{% extends 'tallermami/base.html' %}
+
+
+{% block title %}
+
+Mis turnos | Taller Molina Henze
+
+{% endblock %}
+
+
+{% block content %}
+
+
+<section class="page-header">
+
+    <div class="container">
+
+        <span>
+            CLIENTE
+        </span>
+
+        <h1>
+            Mis turnos
+        </h1>
+
+        <p>
+            Consultá tus solicitudes de turno.
+        </p>
+
+    </div>
+
+</section>
+
+
+<section class="my-turns-section">
+
+    <div class="container">
+
+
+        <div class="user-welcome">
+
+            <div>
+
+                <span>
+                    CUENTA
+                </span>
+
+                <h2>
+                    Hola, {{ user.username }}
+                </h2>
+
+            </div>
+
+
+            <a
+                href="{% url 'solicitar_turno' %}"
+                class="btn btn-primary"
+            >
+
+                <i class="fa-solid fa-plus me-2"></i>
+
+                Nuevo turno
+
+            </a>
+
+        </div>
+
+
+        {% if turnos %}
+
+
+            <div class="row g-4">
+
+                {% for turno in turnos %}
+
+                    <div class="col-lg-6">
+
+                        <div class="turn-card">
+
+
+                            <div class="turn-card-top">
+
+                                <div>
+
+                                    <span>
+                                        TURNO #{{ turno.id }}
+                                    </span>
+
+                                    <h3>
+                                        {{ turno.vehiculo }}
+                                    </h3>
+
+                                </div>
+
+
+                                <div class="patente-badge">
+                                    {{ turno.patente }}
+                                </div>
+
+                            </div>
+
+
+                            <div class="turn-card-body">
+
+
+                                <div class="turn-info">
+
+                                    <i class="fa-solid fa-screwdriver-wrench"></i>
+
+                                    <div>
+
+                                        <span>
+                                            Servicio
+                                        </span>
+
+                                        <strong>
+                                            {{ turno.servicio }}
+                                        </strong>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="turn-info">
+
+                                    <i class="fa-solid fa-calendar"></i>
+
+                                    <div>
+
+                                        <span>
+                                            Fecha
+                                        </span>
+
+                                        <strong>
+                                            {{ turno.fecha_turno|date:"d/m/Y H:i" }}
+                                        </strong>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="turn-info">
+
+                                    <i class="fa-solid fa-circle-info"></i>
+
+                                    <div>
+
+                                        <span>
+                                            Estado
+                                        </span>
+
+                                        <strong>
+                                            {{ turno.get_estado_display }}
+                                        </strong>
+
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+
+
+                            <div class="turn-progress">
+
+                                <div class="progress">
+
+                                    <div
+                                        class="progress-bar"
+                                        style="width: {{ turno.porcentaje_reparacion }}%;"
+                                    ></div>
+
+                                </div>
+
+                                <span>
+                                    {{ turno.porcentaje_reparacion }}% completado
+                                </span>
+
+                            </div>
+
+
+                            <div class="turn-card-footer">
+
+                                <a
+                                    href="{% url 'estado_reparacion' %}"
+                                    class="btn btn-outline-primary btn-sm"
+                                >
+                                    Ver estado
+                                </a>
+
+
+                                <a
+                                    href="{% url 'descargar_pdf' turno.id %}"
+                                    class="btn btn-primary btn-sm"
+                                >
+
+                                    <i class="fa-solid fa-file-pdf me-1"></i>
+
+                                    PDF
+
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+
+        {% else %}
+
+
+            <div class="empty-turns">
+
+                <div>
+
+                    <i class="fa-solid fa-calendar-xmark"></i>
+
+                </div>
+
+                <h2>
+                    Todavía no tenés turnos
+                </h2>
+
+                <p>
+                    Cuando solicites un turno,
+                    aparecerá acá.
+                </p>
+
+                <a
+                    href="{% url 'solicitar_turno' %}"
+                    class="btn btn-primary"
+                >
+                    Solicitar mi primer turno
+                </a>
+
+            </div>
+
+
+        {% endif %}
+
+
+    </div>
+
+</section>
+
+
+{% endblock %}
