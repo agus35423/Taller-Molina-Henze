@@ -892,44 +892,74 @@ img {
 
 .cta-section {
 
-    padding: 100px 20px;
+    position: relative;
 
-    background: var(--light);
+    padding: 104px 0;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(7, 24, 39, .96) 0%,
+            rgba(7, 24, 39, .88) 48%,
+            rgba(7, 24, 39, .56) 100%
+        ),
+        url("../images/tabla de trabajo.avif") center 52% / cover no-repeat;
+
+    color: white;
 
 }
 
 
-.cta-section > .container > span {
+.cta-content {
 
-    color: var(--blue);
+    max-width: 650px;
 
-    font-size: 12px;
+}
 
-    font-weight: 800;
 
-    letter-spacing: 2px;
+.cta-content > span {
+
+    display: inline-block;
+
+    margin-bottom: 12px;
+
+    color: #9fc7ff;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.7px;
 
 }
 
 
 .cta-section h2 {
 
-    margin: 10px 0;
+    margin: 0 0 14px;
 
-    font-size: 42px;
+    max-width: 580px;
+
+    font-size: clamp(34px, 4vw, 48px);
+
+    line-height: 1.12;
 
     font-weight: 800;
+
+    letter-spacing: -1.5px;
 
 }
 
 
 .cta-section p {
 
-    color: var(--gray);
+    color: rgba(255, 255, 255, .78);
 
-    max-width: 600px;
+    max-width: 520px;
 
-    margin: 0 auto 25px;
+    margin: 0 0 26px;
 
     line-height: 1.7;
 
