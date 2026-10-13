@@ -164,6 +164,7 @@ img {
 
         linear-gradient(
             90deg,
+<<<<<<< HEAD
             rgba(5, 19, 32, .94) 0%,
             rgba(5, 19, 32, .82) 45%,
             rgba(5, 19, 32, .38) 100%
@@ -171,6 +172,18 @@ img {
 
         url("../images/muscular-car-service-worker-repairing-vehicle.jpg")
         center 42% / cover no-repeat;
+=======
+            rgba(5, 19, 32, .98) 0%,
+            rgba(5, 19, 32, .90) 45%,
+            rgba(5, 19, 32, .55) 100%
+        ),
+
+        radial-gradient(
+            circle at 80% 50%,
+            #234d75 0%,
+            #071827 55%
+        );
+>>>>>>> 1a1b8a3202145e2499bea69c26b88eb72b56c659
 
 }
 
@@ -575,6 +588,7 @@ img {
 }
 
 
+<<<<<<< HEAD
 .service-image {
 
     display: block;
@@ -592,6 +606,8 @@ img {
 }
 
 
+=======
+>>>>>>> 1a1b8a3202145e2499bea69c26b88eb72b56c659
 .service-card p {
 
     color: var(--gray);
@@ -681,15 +697,39 @@ img {
 
     height: 370px;
 
+<<<<<<< HEAD
     overflow: hidden;
 
     border-radius: 18px;
 
+=======
+    border-radius: 18px;
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #0d6efd,
+            #071827
+        );
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: white;
+
+>>>>>>> 1a1b8a3202145e2499bea69c26b88eb72b56c659
     box-shadow: 0 25px 60px rgba(7,24,39,.25);
 
 }
 
 
+<<<<<<< HEAD
 .about-image-main img {
 
     width: 100%;
@@ -701,6 +741,24 @@ img {
     object-fit: cover;
 
     object-position: center;
+=======
+.about-image-main i {
+
+    font-size: 90px;
+
+    margin-bottom: 25px;
+
+}
+
+
+.about-image-main span {
+
+    font-size: 20px;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+>>>>>>> 1a1b8a3202145e2499bea69c26b88eb72b56c659
 
 }
 
@@ -892,6 +950,7 @@ img {
 
 .cta-section {
 
+<<<<<<< HEAD
     position: relative;
 
     padding: 104px 0;
@@ -908,10 +967,16 @@ img {
         url("../images/tabla de trabajo.avif") center 52% / cover no-repeat;
 
     color: white;
+=======
+    padding: 100px 20px;
+
+    background: var(--light);
+>>>>>>> 1a1b8a3202145e2499bea69c26b88eb72b56c659
 
 }
 
 
+<<<<<<< HEAD
 .cta-content {
 
     max-width: 650px;
@@ -932,12 +997,24 @@ img {
     font-weight: 700;
 
     letter-spacing: 1.7px;
+=======
+.cta-section > .container > span {
+
+    color: var(--blue);
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+>>>>>>> 1a1b8a3202145e2499bea69c26b88eb72b56c659
 
 }
 
 
 .cta-section h2 {
 
+<<<<<<< HEAD
     margin: 0 0 14px;
 
     max-width: 580px;
@@ -950,16 +1027,32 @@ img {
 
     letter-spacing: -1.5px;
 
+=======
+    margin: 10px 0;
+
+    font-size: 42px;
+
+    font-weight: 800;
+
+>>>>>>> 1a1b8a3202145e2499bea69c26b88eb72b56c659
 }
 
 
 .cta-section p {
 
+<<<<<<< HEAD
     color: rgba(255, 255, 255, .78);
 
     max-width: 520px;
 
     margin: 0 0 26px;
+=======
+    color: var(--gray);
+
+    max-width: 600px;
+
+    margin: 0 auto 25px;
+>>>>>>> 1a1b8a3202145e2499bea69c26b88eb72b56c659
 
     line-height: 1.7;
 
@@ -2356,6 +2449,7 @@ img {
 
     .hero-principal {
 
+<<<<<<< HEAD
         min-height: 0;
 
         background-position: 58% center;
@@ -2365,15 +2459,22 @@ img {
     .hero-content {
 
         padding: 72px 0;
+=======
+        min-height: 620px;
+>>>>>>> 1a1b8a3202145e2499bea69c26b88eb72b56c659
 
     }
 
 
     .hero-content h1 {
 
+<<<<<<< HEAD
         font-size: clamp(36px, 9vw, 56px);
 
         letter-spacing: -1.5px;
+=======
+        letter-spacing: -2px;
+>>>>>>> 1a1b8a3202145e2499bea69c26b88eb72b56c659
 
     }
 
@@ -2398,27 +2499,39 @@ img {
 
     }
 
+<<<<<<< HEAD
     .stats-box {
 
         grid-template-columns: repeat(2, minmax(0, 1fr));
 
         padding: 12px;
+=======
+
+    .stats-box {
+
+        grid-template-columns: 1fr;
+>>>>>>> 1a1b8a3202145e2499bea69c26b88eb72b56c659
 
     }
 
 
     .stat-item {
 
+<<<<<<< HEAD
         min-width: 0;
 
         padding: 14px 10px;
 
         border-right: 1px solid var(--border);
+=======
+        border-right: none;
+>>>>>>> 1a1b8a3202145e2499bea69c26b88eb72b56c659
 
         border-bottom: 1px solid var(--border);
 
     }
 
+<<<<<<< HEAD
     .stat-item:nth-child(2),
     .stat-item:last-child {
 
@@ -2427,12 +2540,16 @@ img {
     }
 
     .stat-item:nth-child(3),
+=======
+
+>>>>>>> 1a1b8a3202145e2499bea69c26b88eb72b56c659
     .stat-item:last-child {
 
         border-bottom: none;
 
     }
 
+<<<<<<< HEAD
     .stat-item > i {
 
         flex: 0 0 40px;
@@ -2470,6 +2587,8 @@ img {
 
     }
 
+=======
+>>>>>>> 1a1b8a3202145e2499bea69c26b88eb72b56c659
 
     .about-list {
 
@@ -2484,6 +2603,7 @@ img {
 
     }
 
+<<<<<<< HEAD
     .about-image {
 
         min-height: 330px;
@@ -2525,6 +2645,12 @@ img {
     .form-actions .btn {
 
         flex: 1 1 auto;
+=======
+
+    .tracking-box {
+
+        padding: 35px;
+>>>>>>> 1a1b8a3202145e2499bea69c26b88eb72b56c659
 
     }
 
@@ -2560,6 +2686,7 @@ img {
 
     }
 
+<<<<<<< HEAD
     .vehicle-status-header,
     .status-main {
 
@@ -2574,6 +2701,8 @@ img {
 
     }
 
+=======
+>>>>>>> 1a1b8a3202145e2499bea69c26b88eb72b56c659
 
     .status-details {
 
@@ -2584,14 +2713,18 @@ img {
 
     .status-detail {
 
+<<<<<<< HEAD
         padding: 20px;
 
+=======
+>>>>>>> 1a1b8a3202145e2499bea69c26b88eb72b56c659
         border-right: none;
 
         border-bottom: 1px solid var(--border);
 
     }
 
+<<<<<<< HEAD
     .status-observations {
 
         margin: 0 20px 20px;
@@ -2647,6 +2780,14 @@ img {
     .auth-section {
 
         padding: 56px 0;
+=======
+
+    .user-welcome {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+>>>>>>> 1a1b8a3202145e2499bea69c26b88eb72b56c659
 
     }
 
@@ -2660,7 +2801,11 @@ img {
 
     .export-card {
 
+<<<<<<< HEAD
         padding: 30px 20px;
+=======
+        padding: 35px 20px;
+>>>>>>> 1a1b8a3202145e2499bea69c26b88eb72b56c659
 
     }
 
@@ -2673,6 +2818,7 @@ img {
 
     }
 
+<<<<<<< HEAD
 }
 
 
@@ -2984,4 +3130,6 @@ img {
 
     }
 
+=======
+>>>>>>> 1a1b8a3202145e2499bea69c26b88eb72b56c659
 }
