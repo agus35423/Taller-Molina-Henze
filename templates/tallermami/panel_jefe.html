@@ -1,0 +1,81 @@
+{% extends 'tallermami/base.html' %}
+
+
+{% block title %}
+Panel del jefe | Taller Molina Henze
+{% endblock %}
+
+
+{% block content %}
+
+<section class="page-header">
+    <div class="container">
+        <span>ADMINISTRACIÓN</span>
+        <h1>Panel del jefe</h1>
+        <p>Resumen y seguimiento de los turnos del taller.</p>
+    </div>
+</section>
+
+<section class="my-turns-section">
+    <div class="container">
+        <div class="row g-4 mb-4">
+            <div class="col-md-6">
+                <div class="turn-card turn-card-body">
+                    <span>Total de turnos</span>
+                    <h2>{{ cantidad_turnos }}</h2>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="turn-card turn-card-body">
+                    <span>Turnos pendientes</span>
+                    <h2>{{ turnos_pendientes }}</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-striped align-middle">
+                <thead>
+                    <tr>
+                        <th>Turno</th>
+                        <th>Cliente</th>
+                        <th>Vehículo</th>
+                        <th>Patente</th>
+                        <th>Servicio</th>
+                        <th>Trabajador</th>
+                        <th>Fecha</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for turno in turnos %}
+                        <tr>
+                            <td>#{{ turno.id }}</td>
+                            <td>
+                                {% if turno.usuario %}
+                                    {{ turno.usuario.get_full_name|default:turno.usuario.username }}
+                                {% else %}
+                                    Sin usuario
+                                {% endif %}
+                            </td>
+                            <td>{{ turno.vehiculo }}</td>
+                            <td>{{ turno.patente }}</td>
+                            <td>{{ turno.servicio }}</td>
+                            <td>{{ turno.trabajador|default:"Sin asignar" }}</td>
+                            <td>{{ turno.fecha_turno|date:"d/m/Y H:i" }}</td>
+                            <td>{{ turno.get_estado_display }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="8" class="text-center py-4">
+                                Todavía no hay turnos registrados.
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

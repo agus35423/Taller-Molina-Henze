@@ -4,34 +4,17 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseForbidden
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-
->>>>>>> 1a1b8a3202145e2499bea69c26b88eb72b56c659
->>>>>>> acb6ee74944e1c6ee931e22d0023005268d6d47a
 from openpyxl import Workbook, load_workbook
 from openpyxl.styles import Font, PatternFill, Alignment
 from openpyxl.utils import get_column_letter
 
 from .forms import RegistroForm, SolicitarTurnoForm
-<<<<<<< HEAD
 from django.urls import reverse
 from .models import Turno, Trabajo, OfertaTurno
-=======
-<<<<<<< HEAD
-from .models import Turno, Trabajo
-
-=======
-from django.urls import reverse
-from .models import Turno, Trabajo, OfertaTurno
->>>>>>> 1a1b8a3202145e2499bea69c26b88eb72b56c659
->>>>>>> acb6ee74944e1c6ee931e22d0023005268d6d47a
 
 # ==========================================================
 # INICIO
@@ -46,6 +29,37 @@ def inicio(request):
         "tallermami/inicio.html",
         {
             "trabajos": trabajos,
+        }
+    )
+
+
+# ==========================================================
+# PANEL DEL JEFE
+# ==========================================================
+
+@login_required(login_url="login")
+def panel_jefe(request):
+
+    if not request.user.is_superuser:
+        return HttpResponseForbidden(
+            "Solo los superusuarios pueden acceder a este panel."
+        )
+
+    turnos = Turno.objects.select_related(
+        "usuario",
+        "servicio",
+        "trabajador"
+    )
+
+    return render(
+        request,
+        "tallermami/panel_jefe.html",
+        {
+            "turnos": turnos,
+            "cantidad_turnos": turnos.count(),
+            "turnos_pendientes": turnos.filter(
+                estado="pendiente"
+            ).count(),
         }
     )
 
@@ -301,30 +315,13 @@ def turno_exitoso(request, turno_id):
 # MIS TURNOS
 # ==========================================================
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-
-
-
->>>>>>> 1a1b8a3202145e2499bea69c26b88eb72b56c659
->>>>>>> acb6ee74944e1c6ee931e22d0023005268d6d47a
 @login_required
 def mis_turnos(request):
 
     turnos = Turno.objects.filter(
         usuario=request.user
-<<<<<<< HEAD
     ).exclude(
         estado="cancelado"
-=======
-<<<<<<< HEAD
-=======
-    ).exclude(
-        estado="cancelado"
->>>>>>> 1a1b8a3202145e2499bea69c26b88eb72b56c659
->>>>>>> acb6ee74944e1c6ee931e22d0023005268d6d47a
     ).select_related(
         "servicio"
     )
@@ -337,13 +334,6 @@ def mis_turnos(request):
         }
     )
 
-
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-
->>>>>>> acb6ee74944e1c6ee931e22d0023005268d6d47a
 # ==========================================================
 # CANCELAR TURNO
 # ==========================================================
@@ -547,10 +537,6 @@ def aceptar_oferta_turno(request, token):
         }
     )
 
-<<<<<<< HEAD
-=======
->>>>>>> 1a1b8a3202145e2499bea69c26b88eb72b56c659
->>>>>>> acb6ee74944e1c6ee931e22d0023005268d6d47a
 # ==========================================================
 # ESTADO DE REPARACIÓN
 # ==========================================================

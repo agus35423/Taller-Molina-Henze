@@ -16,6 +16,12 @@ urlpatterns = [
         name="inicio"
     ),
 
+    path(
+        "jefe/",
+        views.panel_jefe,
+        name="panel_jefe"
+    ),
+
 
     # ======================================================
     # AUTENTICACIÓN
@@ -98,7 +104,7 @@ path(
         views.mis_turnos,
         name="mis_turnos"
     ),
-<<<<<<< HEAD
+
     path(
         "turnos/cancelar/<int:turno_id>/",
         views.cancelar_turno,
@@ -110,23 +116,6 @@ path(
         views.aceptar_oferta_turno,
         name="aceptar_oferta_turno"
     ),
-=======
-<<<<<<< HEAD
-
-=======
-    path(
-    "turnos/cancelar/<int:turno_id>/",
-    views.cancelar_turno,
-    name="cancelar_turno"
-    ),
-
-    path(
-    "oferta-turno/<uuid:token>/",
-    views.aceptar_oferta_turno,
-    name="aceptar_oferta_turno"
-    ),
->>>>>>> 1a1b8a3202145e2499bea69c26b88eb72b56c659
->>>>>>> acb6ee74944e1c6ee931e22d0023005268d6d47a
 
     # ======================================================
     # ESTADO DEL VEHÍCULO

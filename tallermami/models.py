@@ -1,15 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator
-<<<<<<< HEAD
 import uuid
-=======
-<<<<<<< HEAD
-
-=======
-import uuid
->>>>>>> 1a1b8a3202145e2499bea69c26b88eb72b56c659
->>>>>>> acb6ee74944e1c6ee931e22d0023005268d6d47a
 
 # ==========================================================
 # TRABAJOS / SERVICIOS
@@ -189,7 +181,6 @@ class Turno(models.Model):
 
         verbose_name="Servicio"
     )
-<<<<<<< HEAD
 
     # Trabajador asignado al turno
     trabajador = models.ForeignKey(
@@ -200,24 +191,6 @@ class Turno(models.Model):
         related_name="turnos_asignados",
         verbose_name="Trabajador asignado"
     )
-=======
-        # Trabajador asignado
-    # Trabajador asignado al turno
-    trabajador = models.ForeignKey(
-
-    Trabajador,
-
-    on_delete=models.SET_NULL,
-
-    null=True,
-
-    blank=True,
-
-    related_name="turnos_asignados",
-
-    verbose_name="Trabajador asignado"
-)
->>>>>>> acb6ee74944e1c6ee931e22d0023005268d6d47a
 
     # Fecha y hora
     fecha_turno = models.DateTimeField(
@@ -278,18 +251,10 @@ class Turno(models.Model):
 
         verbose_name_plural = "Turnos"
 
-<<<<<<< HEAD
         ordering = ["-fecha_turno"]
 
 
 # ==========================================================
-=======
-<<<<<<< HEAD
-        ordering = ["-fecha_turno"]
-=======
-        ordering = ["-fecha_turno"]
-        # ==========================================================
->>>>>>> acb6ee74944e1c6ee931e22d0023005268d6d47a
 # OFERTA DE TURNO ANTERIOR
 # ==========================================================
 
@@ -336,7 +301,3 @@ class OfertaTurno(models.Model):
         verbose_name = "Oferta de turno anterior"
         verbose_name_plural = "Ofertas de turnos anteriores"
         ordering = ["fecha_creacion"]
-<<<<<<< HEAD
-=======
->>>>>>> 1a1b8a3202145e2499bea69c26b88eb72b56c659
->>>>>>> acb6ee74944e1c6ee931e22d0023005268d6d47a

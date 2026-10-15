@@ -1,10 +1,4 @@
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
 
->>>>>>> 1a1b8a3202145e2499bea69c26b88eb72b56c659
->>>>>>> acb6ee74944e1c6ee931e22d0023005268d6d47a
 {% extends 'tallermami/base.html' %}
 
 
@@ -78,20 +72,8 @@ Mis turnos | Taller Molina Henze
 
             <div class="row g-4">
 
-<<<<<<< HEAD
                 {% for turno in turnos %}
 
-=======
-<<<<<<< HEAD
-                {% for turno in turnos %}
-
-=======
-
-                {% for turno in turnos %}
-
-
->>>>>>> 1a1b8a3202145e2499bea69c26b88eb72b56c659
->>>>>>> acb6ee74944e1c6ee931e22d0023005268d6d47a
                     <div class="col-lg-6">
 
                         <div class="turn-card">
@@ -202,13 +184,7 @@ Mis turnos | Taller Molina Henze
 
                             <div class="turn-card-footer">
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
 
->>>>>>> 1a1b8a3202145e2499bea69c26b88eb72b56c659
->>>>>>> acb6ee74944e1c6ee931e22d0023005268d6d47a
                                 <a
                                     href="{% url 'estado_reparacion' %}"
                                     class="btn btn-outline-primary btn-sm"
@@ -217,7 +193,6 @@ Mis turnos | Taller Molina Henze
                                 </a>
 
 
-<<<<<<< HEAD
                                 <form
                                     method="POST"
                                     action="{% url 'cancelar_turno' turno.id %}"
@@ -233,34 +208,6 @@ Mis turnos | Taller Molina Henze
                                         Cancelar turno
                                     </button>
                                 </form>
-=======
-<<<<<<< HEAD
-=======
-                                <form
-    method="POST"
-    action="{% url 'cancelar_turno' turno.id %}"
-    style="display: inline;"
-    >
-
-    {% csrf_token %}
-
-    <button
-        type="submit"
-        class="btn btn-outline-danger btn-sm"
-        onclick="return confirm('¿Estás seguro de que querés cancelar este turno?');"
-    >
-
-        <i class="fa-solid fa-xmark me-1"></i>
-
-        Cancelar turno
-
-    </button>
-
-</form>
-
-
->>>>>>> 1a1b8a3202145e2499bea69c26b88eb72b56c659
->>>>>>> acb6ee74944e1c6ee931e22d0023005268d6d47a
                                 <a
                                     href="{% url 'descargar_pdf' turno.id %}"
                                     class="btn btn-primary btn-sm"
@@ -272,38 +219,14 @@ Mis turnos | Taller Molina Henze
 
                                 </a>
 
-<<<<<<< HEAD
                             </div>
 
-=======
-<<<<<<< HEAD
-                            </div>
-
-=======
-
-                            </div>
-
-
->>>>>>> 1a1b8a3202145e2499bea69c26b88eb72b56c659
->>>>>>> acb6ee74944e1c6ee931e22d0023005268d6d47a
                         </div>
 
                     </div>
 
-<<<<<<< HEAD
                 {% endfor %}
 
-=======
-<<<<<<< HEAD
-                {% endfor %}
-
-=======
-
-                {% endfor %}
-
-
->>>>>>> 1a1b8a3202145e2499bea69c26b88eb72b56c659
->>>>>>> acb6ee74944e1c6ee931e22d0023005268d6d47a
             </div>
 
 
@@ -345,13 +268,4 @@ Mis turnos | Taller Molina Henze
 </section>
 
 
-<<<<<<< HEAD
 {% endblock %}
-=======
-<<<<<<< HEAD
-{% endblock %}
-=======
-{% endblock %}
-
->>>>>>> 1a1b8a3202145e2499bea69c26b88eb72b56c659
->>>>>>> acb6ee74944e1c6ee931e22d0023005268d6d47a
