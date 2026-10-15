@@ -1,0 +1,186 @@
+
+{% extends "tallermami/base.html" %}
+
+{% block title %}{{ titulo }}{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+
+    {% if panel == "jefe" %}
+        <a href="{% url 'vista_jefe_taller' %}"
+           class="btn btn-outline-secondary btn-sm mb-3">
+            ← Volver al panel
+        </a>
+    {% else %}
+        <a href="{% url 'vista_secretario' %}"
+           class="btn btn-outline-secondary btn-sm mb-3">
+            ← Volver al panel
+        </a>
+    {% endif %}
+
+    <h1 class="mb-4">{{ titulo }}</h1>
+
+    {% if seccion == "trabajos" %}
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Precio estimado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for trabajo in trabajos %}
+                    <tr>
+                        <td>{{ trabajo.nombre }}</td>
+                        <td>{{ trabajo.descripcion }}</td>
+                        <td>{{ trabajo.precio_estimado|default_if_none:"Sin definir" }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr><td colspan="3">No hay trabajos registrados.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    {% elif seccion == "trabajadores" %}
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Especialidad</th>
+                        <th>Teléfono</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for trabajador in trabajadores %}
+                    <tr>
+                        <td>{{ trabajador.nombre }}</td>
+                        <td>{{ trabajador.apellido }}</td>
+                        <td>{{ trabajador.especialidad }}</td>
+                        <td>{{ trabajador.telefono }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr><td colspan="4">No hay trabajadores registrados.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    {% elif seccion == "clientes" %}
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Correo electrónico</th>
+                        <th>Teléfono</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cliente in clientes %}
+                    <tr>
+                        <td>{{ cliente.nombre }}</td>
+                        <td>{{ cliente.apellido }}</td>
+                        <td>{{ cliente.email }}</td>
+                        <td>{{ cliente.telefono }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr><td colspan="4">No hay clientes registrados.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    {% elif seccion == "turnos" %}
+        <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-3">
+            <p class="text-muted mb-0">
+                Turnos encontrados: {{ turnos|length }}
+            </p>
+
+            <a href="{% url 'descargar_excel_turnos' %}?buscar={{ busqueda|urlencode }}"
+               class="btn btn-success">
+                <i class="fas fa-file-excel me-2"></i>
+                Exportar a Excel
+            </a>
+        </div>
+
+        <form method="get" class="row g-2 mb-4">
+            <div class="col-md-9">
+                <input
+                    type="text"
+                    name="buscar"
+                    class="form-control"
+                    placeholder="Buscar por nombre, apellido, vehículo o patente..."
+                    value="{{ busqueda|default:'' }}"
+                >
+            </div>
+            <div class="col-md-3 d-grid">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-search me-2"></i>Buscar
+                </button>
+            </div>
+
+            {% if busqueda %}
+            <div class="col-12">
+                {% if panel == "jefe" %}
+                    <a href="{% url 'jefe_turnos' %}"
+                       class="btn btn-outline-secondary btn-sm">
+                        Limpiar búsqueda
+                    </a>
+                {% else %}
+                    <a href="{% url 'secretario_turnos' %}"
+                       class="btn btn-outline-secondary btn-sm">
+                        Limpiar búsqueda
+                    </a>
+                {% endif %}
+            </div>
+            {% endif %}
+        </form>
+
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Cliente</th>
+                        <th>Vehículo</th>
+                        <th>Patente</th>
+                        <th>Servicio</th>
+                        <th>Fecha y hora</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for turno in turnos %}
+                    <tr>
+                        <td>
+                            {% if turno.usuario.get_full_name %}
+                                {{ turno.usuario.get_full_name }}
+                            {% else %}
+                                {{ turno.usuario.username }}
+                            {% endif %}
+                        </td>
+                        <td>{{ turno.vehiculo }}</td>
+                        <td>{{ turno.patente }}</td>
+                        <td>{{ turno.servicio }}</td>
+                        <td>{{ turno.fecha_turno|date:"d/m/Y H:i" }}</td>
+                        <td>{{ turno.estado|title }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="6" class="text-center">
+                            No se encontraron turnos.
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
+
+</div>
+{% endblock %}```

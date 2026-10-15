@@ -1,0 +1,57 @@
+
+{% extends "tallermami/base.html" %}
+
+{% block title %}Panel del Jefe de Taller{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <h1>Panel del Jefe de Taller</h1>
+    <p class="text-muted">Seleccioná la sección que querés administrar.</p>
+
+    <div class="row g-4 mt-2">
+        <div class="col-md-6">
+            <a href="{% url 'jefe_trabajos' %}" class="text-decoration-none">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h2 class="h5">Trabajos y servicios</h2>
+                        <p class="text-muted mb-0">Consultar trabajos y precios.</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-6">
+            <a href="{% url 'jefe_trabajadores' %}" class="text-decoration-none">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h2 class="h5">Trabajadores</h2>
+                        <p class="text-muted mb-0">Consultar el personal del taller.</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-6">
+            <a href="{% url 'jefe_clientes' %}" class="text-decoration-none">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h2 class="h5">Clientes</h2>
+                        <p class="text-muted mb-0">Consultar clientes registrados.</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-6">
+            <a href="{% url 'jefe_turnos' %}" class="text-decoration-none">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h2 class="h5">Turnos</h2>
+                        <p class="text-muted mb-0">Buscar turnos y exportarlos a Excel.</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
