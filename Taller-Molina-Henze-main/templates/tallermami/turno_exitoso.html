@@ -1,0 +1,129 @@
+{% extends 'tallermami/base.html' %}
+
+
+{% block title %}
+
+Turno solicitado | Taller Molina Henze
+
+{% endblock %}
+
+
+{% block content %}
+
+<section class="success-section">
+
+    <div class="container">
+
+        <div class="success-card">
+
+            <div class="success-icon">
+
+                <i class="fa-solid fa-check"></i>
+
+            </div>
+
+
+            <span class="success-label">
+                SOLICITUD RECIBIDA
+            </span>
+
+
+            <h1>
+                ¡Turno solicitado correctamente!
+            </h1>
+
+
+            <p>
+                Recibimos tu solicitud y ya quedó registrada
+                en nuestro sistema.
+            </p>
+
+
+            <div class="turno-summary">
+
+
+                <div>
+
+                    <span>
+                        Vehículo
+                    </span>
+
+                    <strong>
+                        {{ turno.vehiculo }}
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Patente
+                    </span>
+
+                    <strong>
+                        {{ turno.patente }}
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Servicio
+                    </span>
+
+                    <strong>
+                        {{ turno.servicio }}
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Fecha
+                    </span>
+
+                    <strong>
+                        {{ turno.fecha_turno|date:"d/m/Y H:i" }}
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="success-actions">
+
+                <a
+                    href="{% url 'descargar_pdf' turno.id %}"
+                    class="btn btn-primary"
+                >
+
+                    <i class="fa-solid fa-file-pdf me-2"></i>
+
+                    Descargar comprobante
+
+                </a>
+
+
+                <a
+                    href="{% url 'inicio' %}"
+                    class="btn btn-outline-secondary"
+                >
+                    Volver al inicio
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

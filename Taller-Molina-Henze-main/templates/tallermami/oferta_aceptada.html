@@ -1,0 +1,90 @@
+```html
+{% extends 'tallermami/base.html' %}
+
+
+{% block title %}
+
+Oferta aceptada | Taller Molina Henze
+
+{% endblock %}
+
+
+{% block content %}
+
+
+<section class="page-header">
+
+    <div class="container">
+
+        <span>
+            TURNO
+        </span>
+
+        <h1>
+            Oferta aceptada
+        </h1>
+
+        <p>
+            Tu solicitud de turno fue aceptada correctamente.
+        </p>
+
+    </div>
+
+</section>
+
+
+<section class="my-turns-section">
+
+    <div class="container">
+
+        <div class="empty-turns">
+
+            <div>
+
+                <i class="fa-solid fa-circle-check"></i>
+
+            </div>
+
+            <h2>
+                ¡Oferta aceptada!
+            </h2>
+
+            <p>
+                El taller aceptó tu solicitud.
+                Tu turno ya fue confirmado y podés consultar todos los detalles desde la sección
+                <strong>Mis turnos</strong>.
+            </p>
+
+            <div class="mt-4">
+
+                <a
+                    href="{% url 'mis_turnos' %}"
+                    class="btn btn-primary"
+                >
+
+                    <i class="fa-solid fa-calendar-check me-2"></i>
+
+                    Ver mis turnos
+
+                </a>
+
+                <a
+                    href="{% url 'inicio' %}"
+                    class="btn btn-outline-primary ms-2"
+                >
+
+                    Volver al inicio
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+{% endblock %}
+```

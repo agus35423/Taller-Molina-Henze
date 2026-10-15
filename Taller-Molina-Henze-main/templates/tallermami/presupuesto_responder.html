@@ -1,0 +1,64 @@
+{% extends "tallermami/base.html" %}
+
+{% block title %}Respuesta al presupuesto{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="card shadow-sm mx-auto" style="max-width: 650px;">
+        <div class="card-body p-4">
+
+            <h1 class="h3 mb-3">Presupuesto de reparación</h1>
+
+            {% if resultado %}
+                <div class="alert alert-info">
+                    {{ resultado }}
+                </div>
+            {% elif puede_responder %}
+                <p>
+                    Estás por
+                    <strong>
+                        {% if decision == "aceptar" %}
+                            aceptar
+                        {% else %}
+                            rechazar
+                        {% endif %}
+                    </strong>
+                    el presupuesto del turno #{{ presupuesto.turno.id }}.
+                </p>
+
+                <p>
+                    Vehículo: {{ presupuesto.turno.vehiculo }}<br>
+                    Patente: {{ presupuesto.turno.patente }}<br>
+                    Servicio: {{ presupuesto.turno.servicio }}<br>
+                    Total estimado:
+                    <strong>${{ presupuesto.total_estimado|floatformat:2 }}</strong>
+                </p>
+
+                <p>
+                    {% if decision == "aceptar" %}
+                        Al confirmar, autorizás los trabajos incluidos
+                        en este presupuesto.
+                    {% else %}
+                        Al confirmar, informás que no autorizás
+                        los trabajos incluidos en este presupuesto.
+                    {% endif %}
+                </p>
+
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="confirmar" value="si">
+
+                    <button type="submit" class="btn btn-primary">
+                        Confirmar decisión
+                    </button>
+                </form>
+            {% endif %}
+
+            <a href="{% url 'inicio' %}" class="btn btn-outline-secondary mt-3">
+                Volver al inicio
+            </a>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
